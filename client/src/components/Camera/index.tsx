@@ -6,7 +6,7 @@ import { ICamera } from '../../@types/interfaces';
 import './style.scss';
 
 type State = {
-  hasUserMedia: false;
+  hasUserMedia: boolean;
 };
 
 class Camera extends Component <ICamera, State> {
@@ -14,9 +14,20 @@ class Camera extends Component <ICamera, State> {
   static defaultProps = {
     height: 300,
     width: 500,
+    imageQuality: 0.9,
+    imageFormat: 'image/jpeg',
+    imageSmoothingEnabled: true,
     onCameraAccessFail: (error: any) => {},
     onCameraAccessSuccess: () => {},
+    onCaptureImageSuccess: (image: any) => {},
+    onCaptureImageFail: () => {},
   };
+
+  state = {
+    hasUserMedia: false,
+  };
+
+  canvas: HTMLCanvasElement | null = null;
 
   stream: MediaStream | null = null;;
 
@@ -47,9 +58,57 @@ class Camera extends Component <ICamera, State> {
       .catch(this.handleUserMediaError);
   }
 
+  onCaptureImage = () => {
+    if (!this.state.hasUserMedia) {
+      return null
+    }
+
+    const canvas = this.getCanvas();
+
+    if (!canvas) {
+      this.props.onCaptureImageFail()
+      return;
+    }
+
+    const image = canvas.toDataURL(this.props.imageFormat, this.props.imageQuality);
+
+    // TODO stop the tracks
+
+    this.props.onCaptureImageSuccess(image);
+  };
+
+  getCanvas() {
+    if (!this.video || !this.state.hasUserMedia) {
+      return;
+    }
+
+    if (!this.context) {
+      const canvas = document.createElement('canvas');
+
+      if (!this.canvas) {
+        return;
+      }
+      canvas.width = this.props.width;
+      canvas.height = this.props.height;
+
+      this.canvas = canvas;
+      this.context = canvas.getContext('2d');
+    }
+
+    if (!this.context) {
+      return;
+    }
+
+    this.context.imageSmoothingEnabled = this.props.imageSmoothingEnabled;
+    this.context.drawImage(this.video, 0, 0, this.props.width, this.props.height);
+
+    return this.canvas;
+  }
+
   handleUserMedia = (stream: MediaStream) => {
     if (this.video) {
       this.video.srcObject = stream;
+      this.setState({ hasUserMedia: true });
 
       this.props.onCameraAccessSuccess();
     }
