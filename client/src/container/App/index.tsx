@@ -21,7 +21,9 @@ class App extends Component <{}, State> {
       <div className="page-container">
         {
           this.state.image ? (
-            <div>Image</div>
+            <div className="image-container">
+              <img src={this.state.image} alt="Captured Image" />
+            </div>
           ) : (
             <Camera onCaptureImageSuccess={this.onCaptureImageSuccess} />
           )
