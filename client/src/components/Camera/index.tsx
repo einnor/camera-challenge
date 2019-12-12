@@ -13,6 +13,16 @@ class Camera extends Component <ICamera, State> {
 
   video: HTMLVideoElement | null = null;
 
+  componentDidMount() {
+    if(!this.hasGetUserMedia()) {
+      console.log('Unable to access user media');
+      return;
+    }
+    // Can access user media
+  }
+
+  hasGetUserMedia = () => !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
+
   render() {
 
     const { width, height } = this.props;
