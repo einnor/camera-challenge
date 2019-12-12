@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 
 import { ICamera } from '../../@types/interfaces';
 
+import './style.scss';
+
 type State = {};
 
 class Camera extends Component <ICamera, State> {
