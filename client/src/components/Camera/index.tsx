@@ -41,7 +41,13 @@ class Camera extends Component <ICamera, State> {
       .catch(this.handleUserMediaError);
   }
 
-  handleUserMedia = (stream: MediaStream) => {}
+  handleUserMedia = (stream: MediaStream) => {
+    if (this.video) {
+      this.video.srcObject = stream;
+
+      // TODO On Camera Access Success
+    }
+  }
 
   handleUserMediaError = (error: any) => {
     // Error
