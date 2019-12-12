@@ -14,17 +14,38 @@ class Camera extends Component <ICamera, State> {
     width: 500,
   };
 
+  stream: MediaStream | null = null;;
+
   video: HTMLVideoElement | null = null;
+
+  constraints = {
+    video: true,
+  };
 
   componentDidMount() {
     if(!this.hasGetUserMedia()) {
       console.log('Unable to access user media');
       return;
     }
-    // Can access user media
+    // Can access user media. Proceed to initiate the stream
+    this.initiateStream();
   }
 
+  // Check if we have access to the user media
   hasGetUserMedia = () => !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
+
+  initiateStream = () => {
+    navigator.mediaDevices
+      .getUserMedia(this.constraints)
+      .then((stream) => this.handleUserMedia(stream))
+      .catch(this.handleUserMediaError);
+  }
+
+  handleUserMedia = (stream: MediaStream) => {}
+
+  handleUserMediaError = (error: any) => {
+    // Error
+  };
 
   render() {
 
