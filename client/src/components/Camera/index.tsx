@@ -5,7 +5,9 @@ import { ICamera } from '../../@types/interfaces';
 
 import './style.scss';
 
-type State = {};
+type State = {
+  hasUserMedia: false;
+};
 
 class Camera extends Component <ICamera, State> {
 
@@ -30,7 +32,9 @@ class Camera extends Component <ICamera, State> {
       return;
     }
     // Can access user media. Proceed to initiate the stream
-    this.initiateStream();
+    if (!this.state.hasUserMedia) {
+      this.initiateStream();
+    }
   }
 
   // Check if we have access to the user media
