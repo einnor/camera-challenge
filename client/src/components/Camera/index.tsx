@@ -59,53 +59,43 @@ class Camera extends Component <ICamera, State> {
   }
 
   onCaptureImage = () => {
-    if (!this.state.hasUserMedia) {
-      return null
-    }
-
     const canvas = this.getCanvas();
 
     if (!canvas) {
-      this.props.onCaptureImageFail()
       return;
     }
 
     const image = canvas.toDataURL(this.props.imageFormat, this.props.imageQuality);
 
-    // TODO stop the tracks
+     // TODO stop the tracks
 
     this.props.onCaptureImageSuccess(image);
   };
 
   getCanvas() {
-    if (!this.video || !this.state.hasUserMedia) {
+    const canvas = document.createElement('canvas');
+
+    canvas.width = this.props.width;
+    canvas.height = this.props.height;
+
+    this.canvas = canvas;
+
+    const context = this.canvas.getContext('2d');
+    if (!context || !this.video) {
       return;
     }
 
-    if (!this.context) {
-      const canvas = document.createElement('canvas');
+    context.imageSmoothingEnabled = false;
+    context.canvas.height = this.props.height;
+    context.canvas.width = this.props.width;
+    context.drawImage(this.video, 0, 0, this.props.width, this.props.height);
 
-      if (!this.canvas) {
-        return;
-      }
-      canvas.width = this.props.width;
-      canvas.height = this.props.height;
-
-      this.canvas = canvas;
-      this.context = canvas.getContext('2d');
-    }
-
-    if (!this.context) {
-      return;
-    }
-
-    this.context.imageSmoothingEnabled = this.props.imageSmoothingEnabled;
-    this.context.drawImage(this.video, 0, 0, this.props.width, this.props.height);
-
-    return this.canvas;
+    return canvas;
   }
 
   handleUserMedia = (stream: MediaStream) => {
+    this.stream = stream;
+
     if (this.video) {
       this.video.srcObject = stream;
       this.setState({ hasUserMedia: true });
@@ -124,7 +114,7 @@ class Camera extends Component <ICamera, State> {
     return (
       <div className="camera-container">
         <video ref={ref => this.video = ref} autoPlay style={{ width, height, marginBottom: 20 }} />
-        <Button onClick={() => {}} text='Take Photo' />
+        <Button onClick={this.onCaptureImage} text='Take Photo' />
       </div>
     );
   }

@@ -4,13 +4,30 @@ import { Camera } from '../../components';
 
 import './style.scss';
 
-class App extends Component {
+type State = {
+  image: string;
+};
+
+class App extends Component <{}, State> {
+
+  state = {
+    image: '',
+  };
+
+  onCaptureImageSuccess = (image: string) => this.setState({ image });
+
   render() {
-return (
-  <div className="page-container">
-    <Camera />
-  </div>
-);
+    return (
+      <div className="page-container">
+        {
+          this.state.image ? (
+            <div>Image</div>
+          ) : (
+            <Camera onCaptureImageSuccess={this.onCaptureImageSuccess} />
+          )
+        }
+      </div>
+    );
   }
 }
 
