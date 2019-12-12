@@ -12,6 +12,8 @@ class Camera extends Component <ICamera, State> {
   static defaultProps = {
     height: 300,
     width: 500,
+    onCameraAccessFail: (error: any) => {},
+    onCameraAccessSuccess: () => {},
   };
 
   stream: MediaStream | null = null;;
@@ -45,12 +47,12 @@ class Camera extends Component <ICamera, State> {
     if (this.video) {
       this.video.srcObject = stream;
 
-      // TODO On Camera Access Success
+      this.props.onCameraAccessSuccess();
     }
   }
 
   handleUserMediaError = (error: any) => {
-    // Error
+    this.props.onCameraAccessFail(error);
   };
 
   render() {
