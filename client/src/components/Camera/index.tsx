@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+import { Button } from '..'
 import { ICamera } from '../../@types/interfaces';
 
 import './style.scss';
@@ -30,7 +31,8 @@ class Camera extends Component <ICamera, State> {
     const { width, height } = this.props;
     return (
       <div className="camera-container">
-        <video ref={ref => this.video = ref} autoPlay style={{ width: `${width}px`, height: `${height}px` }} />
+        <video ref={ref => this.video = ref} autoPlay style={{ width, height, marginBottom: 20 }} />
+        <Button onClick={() => {}} text='Take Photo' />
       </div>
     );
   }

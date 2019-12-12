@@ -14,7 +14,7 @@ const Button = (props: IButton) => {
 
   return (
     <button
-      className="button"
+      className={`button ${disabled ? 'button--disabled' : ''}`}
       onClick={(event) => onClick(event)}
       disabled={disabled}
     >
