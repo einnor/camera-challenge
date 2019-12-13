@@ -2,7 +2,7 @@ import AWS, { AWSError } from 'aws-sdk';
 
 const s3 = new AWS.S3();
 
-const save = (name: string, data: File) => {
+const save = (name: string, data: string): Promise <string | AWS.AWSError> => {
   return new Promise((resolve, reject) => {
     const params = {
       Bucket: 'camera-challenge-ronnie',
@@ -22,4 +22,6 @@ const save = (name: string, data: File) => {
   })
 }
 
-export default save;
+export {
+  save
+};
