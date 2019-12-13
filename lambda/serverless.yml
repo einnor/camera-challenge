@@ -68,7 +68,7 @@ functions:
     handler: dist/handler.sendEmail
     events:
       - sqs
-        arn: arn:aws:sqs:region:us-west-1:sendEmail
+        arn: arn:aws:sns:us-east-1:562761185174:sendEmail
 #   hello:
 #     handler: handler.hello
 #    The following are a few example events you can configure

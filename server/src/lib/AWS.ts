@@ -1,7 +1,7 @@
 import * as AWS from 'aws-sdk';
 
 // Set the AWS region and Access Key
-AWS.config.update({ region: 'us-west-1' });
+AWS.config.update({ region: 'us-east-1' });
 AWS.config.accessKeyId = process.env.AWS_ACCESS_KEY_ID!;
 
 // Create an AWS SQS service object
