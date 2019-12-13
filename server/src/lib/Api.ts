@@ -26,4 +26,17 @@ export default class Api {
 
     return response.json(responseData);
   }
+
+  public static badRequest(request: Request, response: Response, responseData: string | object): Response {
+    response.statusCode = 400;
+    console.error(`400 Status:\n${responseData || 'no error data'}`);
+
+    if (typeof responseData === 'string') {
+      return response.json({
+        error: responseData,
+      });
+    } else {
+      return response.json(responseData);
+    }
+  }
 }

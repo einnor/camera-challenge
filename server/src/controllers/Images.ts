@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 
-import { ImageStore, ImageSend, Image } from '../lib';
+import { ImageStore, ImageSend, Image, Api } from '../lib';
 
 /**
  * POST
@@ -18,8 +18,8 @@ export const send = async (request: Request, response: Response) => {
       ImageSend.send(imageUrl)
     }
     return response.json({ imageUrl });
-  } catch (err) {
-    console.error(`Error on putting s3 object: ${err}`);
-    return response.status(500).json({});
+  } catch (error) {
+    console.error(`Error on putting s3 object: ${error}`);
+    return Api.internalError(request, response, error);
   }
 };
