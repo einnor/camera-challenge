@@ -1,6 +1,6 @@
 import AWS, { AWSError } from 'aws-sdk';
 
-const s3 = new AWS.S3();
+import { s3 } from './AWS';
 
 const save = (name: string, data: string): Promise <string | AWS.AWSError> => {
   return new Promise((resolve, reject) => {
