@@ -5,6 +5,7 @@ import helmet from 'helmet';
 import 'reflect-metadata';
 
 import { Routes } from './routes';
+import { Api } from './lib';
 
 // Make sure the node log entries have timestamps
 consoleStamp(console, {
@@ -55,7 +56,8 @@ export const app = async () => {
     });
   });
 
-  // TODO Handle unexpected/uncaught errors
+  // Handle unexpected/uncaught errors
+  router.use(Api.internalError);
 
   // Serve the application at the given port
   // When running tests we don't really need to have the app listen on a network port
