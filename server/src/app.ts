@@ -2,7 +2,6 @@ import consoleStamp from 'console-stamp';
 import express, { Response, Request, NextFunction } from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
-import 'reflect-metadata';
 
 import { Routes } from './routes';
 import { Api } from './lib';
