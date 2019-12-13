@@ -6,7 +6,7 @@ export const sendEmail: Handler<ScheduledEvent> = (event: ScheduledEvent, contex
 	const to = `${toFullName} <coding-challenge@mieterengel.de>`;
 	const fromFullName = 'Ronnie Nyaga';
   const from = `${fromFullName} <ronnienyaga@gmail.com>`;
-  const template = 'email';
+  const template = 'send-email';
 
   Email.send(callback, to, from, 'Coding Challenge', template, {}, from).then((result) => {
     console.info(`SES Message ID: ${result.MessageId}`);
