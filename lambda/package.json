@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "deploy": "npm run build && serverless deploy",
+    "deploy": "yarn run build && serverless deploy",
     "send-email": "serverless invoke local --function sendEmail --log",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
