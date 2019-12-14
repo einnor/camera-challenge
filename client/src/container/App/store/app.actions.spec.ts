@@ -1,7 +1,7 @@
 import * as actions from './app.actions';
 import { APIError } from '../../../@types/APIError';
 
-describe('App - Actions', () => {
+describe('Image - Actions', () => {
   let error: APIError;
 
   beforeAll(() => {
