@@ -36,4 +36,13 @@ describe('Camera', () => {
     instance.componentDidMount();
     expect(instance.hasGetUserMedia).toHaveBeenCalled();
   });
+
+  it('should initiate stream if media devices are found', () => {
+    const wrapper = shallow(<Camera />);
+    const instance = wrapper.instance();
+    jest.spyOn(instance, 'hasGetUserMedia').mockReturnValue(true);
+    jest.spyOn(instance, 'initiateStream').mockReturnValue(null);
+    instance.componentDidMount();
+    expect(instance.initiateStream).toHaveBeenCalled();
+  });
 });
