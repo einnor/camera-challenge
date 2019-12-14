@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import { Button } from '..'
-import { ICamera } from '../../@types/interfaces';
+import { ICamera } from '../../@types';
 
 import './style.scss';
 

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { IButton } from '../../@types/interfaces';
+import { IButton } from '../../@types';
 
 import './style.scss';
 
