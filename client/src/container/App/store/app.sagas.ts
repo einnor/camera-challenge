@@ -10,10 +10,10 @@ export default function* entitiesWatcher(): SagaIterator {
 }
 
 export function* sendCapturedImage(action: FluxStandardAction): SagaIterator {
-  const { image } = action.payload;
+  const { imageString } = action.payload;
   try {
     // Make API request.
-    const payload = yield call(Api.sendCapturedImage, image);
+    const payload = yield call(Api.sendCapturedImage, imageString);
 
     // Dispatch action for successful request.
     yield put(actions.sendCapturedImageSuccess(payload));

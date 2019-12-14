@@ -9,12 +9,12 @@ export const SEND_CAPTURED_IMAGE_SUCESS: string = 'SEND_CAPTURED_IMAGE_SUCESS';
 export const SEND_CAPTURED_IMAGE_FAILURE: string = 'SEND_CAPTURED_IMAGE_FAILURE';
 
 // Actions
-export type SendCapturedImageRequest = (image: string) => FluxStandardAction;
+export type SendCapturedImageRequest = (imageString: string) => FluxStandardAction;
 
-export const sendCapturedImageRequest: SendCapturedImageRequest = (image) => {
+export const sendCapturedImageRequest: SendCapturedImageRequest = (imageString) => {
   return {
     type: SEND_CAPTURED_IMAGE_REQUEST,
-    payload: { image },
+    payload: { imageString },
   };
 }
 

@@ -13,11 +13,13 @@ describe('Image - Actions', () => {
   });
 
   it('should send captured image', () => {
+    const imageString = 'imageString'
     const expectedAction = {
-      type: actions.SEND_CAPTURED_IMAGE_REQUEST
+      type: actions.SEND_CAPTURED_IMAGE_REQUEST,
+      payload: { imageString },
     };
 
-    const actionCreator = actions.sendCapturedImageRequest();
+    const actionCreator = actions.sendCapturedImageRequest(imageString);
     expect(actionCreator).toEqual(expectedAction);
   });
 
