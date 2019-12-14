@@ -1,7 +1,5 @@
-import ICamera from './ICamera';
-import IButton from './IButton';
+import Camera from './ICamera';
+import Button from './IButton';
 
-export {
-  ICamera,
-  IButton,
-}
+export type ICamera = Camera;
+export type IButton = Button;
