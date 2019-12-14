@@ -1,6 +1,7 @@
 
 import { FluxStandardAction, ActionCreator } from '../../../@types/FluxStandardActions';
 import { APIError } from '../../../@types/APIError';
+import { Image } from './app.types';
 
 // Action Types
 export const SEND_CAPTURED_IMAGE_REQUEST: string = 'SEND_CAPTURED_IMAGE_REQUEST';
@@ -14,7 +15,7 @@ export const sendCapturedImageRequest: ActionCreator = () => {
   };
 }
 
-export type SendCapturedImageSuccess = (payload: { imageUrl: string }) => FluxStandardAction;
+export type SendCapturedImageSuccess = (payload: Image) => FluxStandardAction;
 
 export const sendCapturedImageSuccess: SendCapturedImageSuccess = (payload) => {
   return {
