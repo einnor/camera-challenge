@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Camera renders 1`] = `
+exports[`Camera should render 1`] = `
 <div
   className="camera-container"
 >
@@ -21,7 +21,7 @@ exports[`Camera renders 1`] = `
 </div>
 `;
 
-exports[`Camera should render 1`] = `
+exports[`Camera should render video element so one can take a photo 1`] = `
 <div
   className="camera-container"
 >
