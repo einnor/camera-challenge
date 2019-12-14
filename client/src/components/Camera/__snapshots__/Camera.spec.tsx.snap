@@ -20,24 +20,3 @@ exports[`Camera should render 1`] = `
   />
 </div>
 `;
-
-exports[`Camera should render video element so one can take a photo 1`] = `
-<div
-  className="camera-container"
->
-  <video
-    autoPlay={true}
-    style={
-      Object {
-        "height": 300,
-        "marginBottom": 20,
-        "width": 500,
-      }
-    }
-  />
-  <Button
-    onClick={[Function]}
-    text="Take Photo"
-  />
-</div>
-`;
