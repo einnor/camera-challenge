@@ -29,4 +29,11 @@ describe('Camera', () => {
     Camera.prototype.componentDidMount.mockRestore();
   });
 
+  it('should check if navigation has media devices on mount', () => {
+    const wrapper = shallow(<Camera />);
+    const instance = wrapper.instance();
+    jest.spyOn(instance, 'hasGetUserMedia');
+    instance.componentDidMount();
+    expect(instance.hasGetUserMedia).toHaveBeenCalled();
+  });
 });
