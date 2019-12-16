@@ -1,5 +1,9 @@
 import { Request, Response } from 'express';
+import os from 'os';
+import path from 'path';
+import fs from 'fs';
 
+import { IMAGE_DIR } from '../middlewares/upload';
 import { ImageStore, ImageSend, Image, Api } from '../lib';
 
 /**
@@ -24,3 +28,14 @@ export const send = async (request: Request, response: Response) => {
     return Api.internalError(request, response, error);
   }
 };
+
+const getAllImagesInDirectory = () : string[] => {
+  var fileNames: string[] = [];
+  fs.readdir(IMAGE_DIR.concat('/'), (err, data) => {
+    if (!err && data && data.length > 0) {
+      data.forEach((fileName) => fileNames.push(fileName));
+    }
+  });
+
+  return fileNames;
+}
