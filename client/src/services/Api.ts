@@ -3,7 +3,7 @@ import { AxiosResponse } from 'axios';
 
 
 export default class Api {
-  public static async sendCapturedImage(imageString: Blob) {
+  public static async sendCapturedImage(imageString: string) {
     const formData = new FormData();
     formData.append('image', imageString, 'image.jpg');
 
