@@ -2,7 +2,7 @@ import multer from 'multer';
 import os from 'os';
 import path from 'path';
 
-export const IMAGE_DIR = path.join(os.tmpdir(), 'images');
+export const IMAGE_DIR = path.join(os.tmpdir(), '');
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {

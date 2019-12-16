@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import fs from 'fs';
 
 import { ImageStore, ImageSend, Api, Image } from '../lib';
 
@@ -10,13 +11,14 @@ import { ImageStore, ImageSend, Api, Image } from '../lib';
  * @param response
  */
 export const send = async (request: Request, response: Response) => {
-  const { image } = request.body;
-  if (!image) {
+  const { file } = request;
+  if (!file) {
     return Api.badRequest(request, response, { error: 'Image is missing in the body' });
   }
+
   try {
     const imageName = Image.generateName();
-    const imageUrl = await ImageStore.save(imageName, image);
+    const imageUrl = await ImageStore.save(imageName, fs.readFileSync(file.path, 'utf8'));
     if (typeof imageUrl === 'string') {
       ImageSend.send(imageUrl)
     }
