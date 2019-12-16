@@ -1,5 +1,5 @@
 import { Images }from '../controllers';
-import { upload } from '../middlewares';
+// import { upload } from '../middlewares';
 import { Route } from '../@types';
 
 export const routes: Route[] = [
@@ -7,6 +7,6 @@ export const routes: Route[] = [
     path: '/image/send',
     method: 'post',
     action: Images.send,
-    middlewares: [upload.single('image')],
+    // middlewares: [upload.single('image')],
   },
 ];

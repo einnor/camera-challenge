@@ -1,10 +1,6 @@
 import { Request, Response } from 'express';
-import os from 'os';
-import path from 'path';
-import fs from 'fs';
 
-import { IMAGE_DIR } from '../middlewares/upload';
-import { ImageStore, ImageSend, Image, Api } from '../lib';
+import { ImageStore, ImageSend, Api, Image } from '../lib';
 
 /**
  * POST
@@ -14,11 +10,13 @@ import { ImageStore, ImageSend, Image, Api } from '../lib';
  * @param response
  */
 export const send = async (request: Request, response: Response) => {
-  console.log(request.body);
-  const image = request.body;
-  const name = Image.generateName();
+  const { image } = request.body;
+  if (!image) {
+    return Api.badRequest(request, response, { error: 'Image is missing in the body' });
+  }
   try {
-    const imageUrl = await ImageStore.save(name, image);
+    const imageName = Image.generateName();
+    const imageUrl = await ImageStore.save(imageName, image);
     if (typeof imageUrl === 'string') {
       ImageSend.send(imageUrl)
     }
@@ -28,14 +26,3 @@ export const send = async (request: Request, response: Response) => {
     return Api.internalError(request, response, error);
   }
 };
-
-const getAllImagesInDirectory = () : string[] => {
-  var fileNames: string[] = [];
-  fs.readdir(IMAGE_DIR.concat('/'), (err, data) => {
-    if (!err && data && data.length > 0) {
-      data.forEach((fileName) => fileNames.push(fileName));
-    }
-  });
-
-  return fileNames;
-}

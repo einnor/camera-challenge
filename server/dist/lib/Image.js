@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.generateName = () => {
-    return 'abc';
+    return Math.floor(Date.now()).toString();
 };
 //# sourceMappingURL=Image.js.map
