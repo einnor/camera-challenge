@@ -11,6 +11,7 @@ export default function* imageWatcher(): SagaIterator {
 
 export function* sendCapturedImage(action: FluxStandardAction): SagaIterator {
   const { imageString } = action.payload;
+
   try {
     // Make API request.
     const payload = yield call(Api.sendCapturedImage, imageString);

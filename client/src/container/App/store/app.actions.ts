@@ -1,5 +1,5 @@
 
-import { FluxStandardAction, ActionCreator } from '../../../@types/FluxStandardActions';
+import { FluxStandardAction } from '../../../@types/FluxStandardActions';
 import { APIError } from '../../../@types/APIError';
 import { Image } from './app.types';
 

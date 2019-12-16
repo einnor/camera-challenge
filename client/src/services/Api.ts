@@ -1,3 +1,5 @@
+/* eslint-disable no-throw-literal */
+
 import axios from '../plugins/axios';
 import { AxiosResponse } from 'axios';
 
@@ -5,10 +7,12 @@ import { AxiosResponse } from 'axios';
 export default class Api {
   public static async sendCapturedImage(imageString: string) {
     const formData = new FormData();
-    formData.append('image', imageString, 'image.jpg');
+    console.log(formData);
+    formData.append('image', imageString);
+    console.log(formData);
 
     try {
-      const response = await axios.post('images', formData, { headers: { 'Content-Type': 'multipart/form-data '}});
+      const response = await axios.post('/images', formData, { headers: { 'Content-Type': 'multipart/form-data '}});
       return Api.handleResponseData(response);
     } catch (error) {
       console.log(error);
