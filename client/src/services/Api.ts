@@ -12,7 +12,7 @@ export default class Api {
     console.log(formData);
 
     try {
-      const response = await axios.post('/images', formData, { headers: { 'Content-Type': 'multipart/form-data '}});
+      const response = await axios.post('/image/send', formData, { headers: { 'Content-Type': 'multipart/form-data '}});
       return Api.handleResponseData(response);
     } catch (error) {
       console.log(error);

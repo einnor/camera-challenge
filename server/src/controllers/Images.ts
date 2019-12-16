@@ -10,6 +10,7 @@ import { ImageStore, ImageSend, Image, Api } from '../lib';
  * @param response
  */
 export const send = async (request: Request, response: Response) => {
+  console.log(request);
   const image = request.body;
   const name = Image.generateName();
   try {
