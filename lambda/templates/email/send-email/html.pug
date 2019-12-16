@@ -12,8 +12,12 @@ html(lang="en")
         table(cellspacing="0" cellpadding="0" border="0" width="680" align="center")
           tr
             td
-              table(cellspacing="0" cellpadding="0" border="0" align="center" bgcolor="#ffffff" width="100%" style="max-width: 680px;")
-                tr
-                  td(style="text-align: center; height: 300" )
-                    | Find attached the code challenge below
-              include ../../partials/footer
+              img(src=`${imageUrl}` width="680" height="" alt="Captured image" border="0" align="center" style="width: 100%; max-width: 680px;")
+          tr
+            td(style="color:#ffffff;text-align:center;height: 100px;")
+              | Find attached the code challenge below
+          tr
+            td(style="color:#ffffff;text-align:center;height: 100px;")
+              a.button-a(href=`${imageUrl}`)
+                | Click to view image on browser
+        include ../../partials/footer

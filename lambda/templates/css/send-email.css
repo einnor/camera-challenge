@@ -32,9 +32,6 @@ table {
   table-layout: fixed !important;
   Margin: 0 auto !important;
 }
-table table table {
-  table-layout: auto;
-}
 
 /* Uses a better rendering method when resizing images in IE. */
 img {
@@ -49,14 +46,10 @@ a[x-apple-data-detectors] {
 }
 
 /* Hover styles for buttons */
-.button-td,
 .button-a {
-  transition: all 100ms ease-in;
-}
-.button-td:hover,
-.button-a:hover {
-  background: #555555 !important;
-  border-color: #555555 !important;
+  background-color: #0366d6;
+  padding: 10px;
+  color: #ffffff;
 }
 
 /* Media Queries */

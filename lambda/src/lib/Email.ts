@@ -5,10 +5,14 @@ import Email from 'email-templates';
 import { Callback } from 'aws-lambda';
 
 // Set the AWS region
-AWS.config.update({ region: 'eu-west-1' });
+AWS.config.update({ region: 'us-east-1' });
 
 // Initalize the SES client
 const SES = new AWS.SES();
+
+type IAttachment = {
+  path: string;
+};
 
 export function send(
   callback: Callback,
@@ -17,6 +21,7 @@ export function send(
   subject: string,
   template: string,
   data?: object,
+  attachments?: IAttachment[],
   replyTo?: string,
   bcc?: string
 ) {
@@ -28,6 +33,7 @@ export function send(
     message: {
       from: from,
       bcc: bcc,
+      attachments: attachments && attachments.length ? attachments : undefined,
     },
     send: false,
     juice: true,
