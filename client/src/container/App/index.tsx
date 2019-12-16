@@ -18,9 +18,44 @@ class App extends Component <IApp, State> {
     image: '',
   };
 
-  onCaptureImageSuccess = (image: string) => {
-    this.setState({ image });
-    this.props.sendCapturedImageRequest(image);
+  b64toBlob = (b64Data: string, contentType: string, sliceSize: number = 512): Blob => {
+    contentType = contentType || '';
+
+    const byteCharacters = atob(b64Data);
+    const byteArrays = [];
+
+    for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+        const slice = byteCharacters.slice(offset, offset + sliceSize);
+
+        const byteNumbers = new Array(slice.length);
+        for (var i = 0; i < slice.length; i++) {
+            byteNumbers[i] = slice.charCodeAt(i);
+        }
+
+        const byteArray = new Uint8Array(byteNumbers);
+        byteArrays.push(byteArray);
+    }
+
+    const blob = new Blob(byteArrays, {type: contentType});
+  return blob;
+}
+
+  onCaptureImageSuccess = (imageString: string) => {
+    this.setState({ image: imageString }, () => {
+
+      // Split the base64 string in data and contentType
+      const block = imageString.split(";");
+
+      // Get the content type of the image
+      const contentType = block[0].split(":")[1];
+
+      // get the real base64 content of the file
+      const realData = block[1].split(",")[1];
+
+      // Convert it to a blob to upload
+      const blob = this.b64toBlob(realData, contentType);
+      this.props.sendCapturedImageRequest(blob);
+    });
   };
 
   render() {

@@ -4,7 +4,7 @@ type IApp = {
   isFetching: boolean;
   imageUrl: string | null;
   error: APIError | null;
-  sendCapturedImageRequest: (imageString: string) => void;
+  sendCapturedImageRequest: (imageString: Blob) => void;
 };
 
 export default IApp;
