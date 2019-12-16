@@ -1,9 +1,9 @@
 import { all } from 'redux-saga/effects';
 
-// Import watchers heres
+import imageWatcher from '../container/App/store/app.sagas';
 
 export default function* rootSaga() {
   yield all([
-    // Combine watchers here
+    imageWatcher,
   ]);
 }

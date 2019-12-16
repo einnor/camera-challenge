@@ -3,9 +3,9 @@ import { SagaIterator } from 'redux-saga';
 import * as actions from './app.actions';
 import { takeLatest } from 'redux-saga/effects';
 import { call, put } from 'redux-saga/effects';
-import {FluxStandardAction} from '../../../@types/FluxStandardActions';
+import { FluxStandardAction } from '../../../@types/FluxStandardActions';
 
-export default function* entitiesWatcher(): SagaIterator {
+export default function* imageWatcher(): SagaIterator {
   yield takeLatest(actions.SEND_CAPTURED_IMAGE_REQUEST, sendCapturedImage);
 }
 

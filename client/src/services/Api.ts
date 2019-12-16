@@ -1,24 +1,18 @@
 import axios from '../plugins/axios';
-import {AxiosResponse} from 'axios';
+import { AxiosResponse } from 'axios';
 
 
 export default class Api {
-  public static async sendCapturedImage (image: string) {
+  public static async sendCapturedImage(imageString: Blob) {
     const formData = new FormData();
-    formData.append('image', image);
+    formData.append('image', imageString, 'image.jpg');
 
     try {
-      const response = await axios({
-        url: 'images',
-        method: 'POST',
-        data:formData,
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        },
-      });
-      return this.handleResponseData(response);
+      const response = await axios.post('images', formData, { headers: { 'Content-Type': 'multipart/form-data '}});
+      return Api.handleResponseData(response);
     } catch (error) {
-      return this.handleResponseData(error);
+      console.log(error);
+      return Api.handleResponseData(error);
     }
   };
 
