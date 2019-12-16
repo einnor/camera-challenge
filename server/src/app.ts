@@ -45,7 +45,6 @@ export const app = async () => {
 
   // Register all application routes
   Routes.forEach((route) => {
-    console.log(route);
 
     // Set the controller for this route.
     router[route.method](route.path, (request: Request, response: Response, next: NextFunction) => {

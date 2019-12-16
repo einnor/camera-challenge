@@ -31,7 +31,6 @@ exports.app = async () => {
     router.use(cors_1.default());
     router.use(helmet_1.default());
     routes_1.Routes.forEach((route) => {
-        console.log(route);
         router[route.method](route.path, (request, response, next) => {
             route
                 .action(request, response)

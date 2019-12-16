@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const lib_1 = require("../lib");
 exports.send = async (request, response) => {
-    console.log(request);
+    console.log(request.body);
     const image = request.body;
     const name = lib_1.Image.generateName();
     try {

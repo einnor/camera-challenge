@@ -7,9 +7,7 @@ import { AxiosResponse } from 'axios';
 export default class Api {
   public static async sendCapturedImage(imageString: string) {
     const formData = new FormData();
-    console.log(formData);
     formData.append('image', imageString);
-    console.log(formData);
 
     try {
       const response = await axios.post('/image/send', formData, { headers: { 'Content-Type': 'multipart/form-data '}});
