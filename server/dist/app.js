@@ -31,6 +31,9 @@ exports.app = async () => {
     router.use(cors_1.default());
     router.use(helmet_1.default());
     routes_1.Routes.forEach((route) => {
+        if (route.middlewares) {
+            route.middlewares.forEach((middleware) => router[route.method](route.path, middleware));
+        }
         router[route.method](route.path, (request, response, next) => {
             route
                 .action(request, response)

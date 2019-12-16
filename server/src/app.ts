@@ -46,6 +46,11 @@ export const app = async () => {
   // Register all application routes
   Routes.forEach((route) => {
 
+    // Apply middlewares if set
+    if (route.middlewares) {
+      route.middlewares.forEach((middleware) => router[route.method](route.path, middleware as express.RequestHandler));
+    }
+
     // Set the controller for this route.
     router[route.method](route.path, (request: Request, response: Response, next: NextFunction) => {
       route
