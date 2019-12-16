@@ -22,7 +22,7 @@ export default class Api {
     switch (response.status) {
       case 200:
       case 201:
-        return response;
+        return response.data;
 
       // BAD REQUEST
       case 400:

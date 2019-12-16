@@ -10,7 +10,6 @@ import { ImageStore, ImageSend, Api, Image } from '../lib';
  * @param response
  */
 export const send = async (request: Request, response: Response) => {
-  console.log(request.body);
   const { image } = request.body;
   if (!image) {
     return Api.badRequest(request, response, { error: 'Image is missing in the body' });

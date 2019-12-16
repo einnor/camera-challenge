@@ -3,8 +3,6 @@ import AWS, { AWSError } from 'aws-sdk';
 import { s3 } from './AWS';
 
 const save = (name: string, data: string): Promise <string | AWS.AWSError> => {
-  console.log(typeof data);
-  console.log(data);
   return new Promise((resolve, reject) => {
     const params = {
       Bucket: 'camera-challenge-ronnie',
@@ -16,7 +14,6 @@ const save = (name: string, data: string): Promise <string | AWS.AWSError> => {
 
     s3.putObject(params, (err: AWSError, data: AWS.S3.PutObjectAclOutput) => {
       if (err) {
-        console.log(err);
         reject(err)
       } else {
         resolve(`//camera-challenge-ronnie.s3.amazonaws.com/${params.Key}`)

@@ -1,3 +1,3 @@
-export const generateName = () : string => {
-  return Math.floor(Date.now()).toString();
+export const generateName = (fileExtension = 'jpeg') : string => {
+  return Math.floor(Date.now()).toString().concat('.').concat(fileExtension);
 }
