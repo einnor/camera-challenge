@@ -35,11 +35,6 @@ provider:
         - "ses:*"
       Resource:
         - "*"
-    - Effect: "Allow"
-      Action:
-        - "sqs:*"
-      Resource:
-        - "*"
 #    - Effect: "Allow"
 #      Action:
 #        - "s3:ListBucket"
