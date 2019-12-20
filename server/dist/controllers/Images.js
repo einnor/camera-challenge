@@ -13,10 +13,11 @@ exports.send = async (request, response) => {
     try {
         const imageName = lib_1.Image.generateName();
         const imageUrl = await lib_1.ImageStore.save(imageName, fs_1.default.readFileSync(file.path, 'utf8'));
+        let sendMessageResult = {};
         if (typeof imageUrl === 'string') {
-            lib_1.ImageSend.send(imageUrl);
+            sendMessageResult = await lib_1.ImageSend.send(imageUrl);
         }
-        return response.json({ imageUrl });
+        return response.json({ imageUrl, metadata: sendMessageResult });
     }
     catch (error) {
         console.error(`Error on putting s3 object: ${error}`);

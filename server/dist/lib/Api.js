@@ -34,6 +34,10 @@ class Api {
             return response.json(responseData);
         }
     }
+    static handleUncaughtException(error, request, response, next) {
+        const errorMessage = error.toString();
+        return Api.internalError(request, response, errorMessage);
+    }
 }
 exports.default = Api;
 //# sourceMappingURL=Api.js.map

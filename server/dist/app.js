@@ -12,16 +12,19 @@ const lib_1 = require("./lib");
 console_stamp_1.default(console, {
     pattern: 'mm/dd/yyyy HH:MM:ss.l',
 });
-const devResponseLogger = (req, res, next) => {
+const devRequestLogger = (req, res, next) => {
     if (process.env.NODE_ENV !== 'development') {
         return next();
     }
-    console.log(`\n\nRESPONSE:\n\n${req.method} ${req.path} \
+    console.log(`\n\REQUEST:\n\n${req.method} ${req.path} \
+    \n  headers: ${JSON.stringify(req.headers)} \
     \n  params: ${JSON.stringify(req.params)} \
     \n  query: ${JSON.stringify(req.query)} \
     \n  body: ${JSON.stringify(req.body)} \
+    \n  file: ${JSON.stringify(req.file)} \
     \n-> \
-    \n${res.statusCode} ${res.statusMessage}`);
+    \n${res.statusCode} ${res.statusMessage}
+    \n\n\n`);
     next();
 };
 exports.app = async () => {
@@ -41,13 +44,13 @@ exports.app = async () => {
                 .catch((err) => next(err));
         });
     });
-    router.use(lib_1.Api.internalError);
+    router.use(lib_1.Api.handleUncaughtException);
     if (process.env.NODE_ENV !== 'test') {
         router.listen(port, () => {
             console.log(`Listening at http://localhost:${port}/`);
         });
     }
-    router.use(devResponseLogger);
+    router.use(devRequestLogger);
     return router;
 };
 //# sourceMappingURL=app.js.map

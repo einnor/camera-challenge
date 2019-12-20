@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { Request, Response, NextFunction } from 'express';
 
 export default class Api {
   public static internalError(request: Request, response: Response, responseData?: string | object): Response {
@@ -38,5 +38,12 @@ export default class Api {
     } else {
       return response.json(responseData);
     }
+  }
+
+  public static handleUncaughtException(error: Error, request: Request, response: Response, next: NextFunction) {
+    const errorMessage: any = error.toString();
+
+    // Otherwise, return 500 (internal server error)
+    return Api.internalError(request, response, errorMessage);
   }
 }

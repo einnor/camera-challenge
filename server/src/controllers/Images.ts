@@ -19,10 +19,11 @@ export const send = async (request: Request, response: Response) => {
   try {
     const imageName = Image.generateName();
     const imageUrl = await ImageStore.save(imageName, fs.readFileSync(file.path, 'utf8'));
+    let sendMessageResult: AWS.SQS.SendMessageResult = {};
     if (typeof imageUrl === 'string') {
-      ImageSend.send(imageUrl)
+      sendMessageResult = await ImageSend.send(imageUrl);
     }
-    return response.json({ imageUrl });
+    return response.json({ imageUrl, metadata: sendMessageResult });
   } catch (error) {
     console.error(`Error on putting s3 object: ${error}`);
     return Api.internalError(request, response, error);

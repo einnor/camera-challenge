@@ -11,17 +11,20 @@ consoleStamp(console, {
   pattern: 'mm/dd/yyyy HH:MM:ss.l',
 });
 
-const devResponseLogger = (req: Request, res: Response, next) => {
+const devRequestLogger = (req: Request, res: Response, next) => {
   if (process.env.NODE_ENV !== 'development') {
     return next();
   }
   console.log(
-    `\n\nRESPONSE:\n\n${req.method} ${req.path} \
+    `\n\REQUEST:\n\n${req.method} ${req.path} \
+    \n  headers: ${JSON.stringify(req.headers)} \
     \n  params: ${JSON.stringify(req.params)} \
     \n  query: ${JSON.stringify(req.query)} \
     \n  body: ${JSON.stringify(req.body)} \
+    \n  file: ${JSON.stringify(req.file)} \
     \n-> \
-    \n${res.statusCode} ${res.statusMessage}`
+    \n${res.statusCode} ${res.statusMessage}
+    \n\n\n`
   );
   next();
 };
@@ -61,7 +64,7 @@ export const app = async () => {
   });
 
   // Handle unexpected/uncaught errors
-  router.use(Api.internalError);
+  router.use(Api.handleUncaughtException);
 
   // Serve the application at the given port
   // When running tests we don't really need to have the app listen on a network port
@@ -72,7 +75,7 @@ export const app = async () => {
     });
   }
 
-  router.use(devResponseLogger);
+  router.use(devRequestLogger);
 
   return router;
 }
