@@ -14,7 +14,7 @@ export default class Api {
       return Api.handleResponseData(response);
     } catch (error) {
       console.log(error);
-      return Api.handleResponseData(error);
+      return Api.handleResponseData(error.response);
     }
   };
 
